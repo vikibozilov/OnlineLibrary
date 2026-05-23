@@ -45,8 +45,6 @@ namespace LibraryApp.Controllers
                 Isbn = b.Isbn,
                 AuthorName = b.Author != null ? b.Author.Name : null,
                 CategoryName = b.Category != null ? b.Category.Name : null,
-                TotalCopies = b.TotalCopies,
-                AvailableCopies = b.AvailableCopies,
                 CoverUrl = b.CoverUrl,
                 Description = b.Description,
                 PublishedYear = b.PublishedYear,
@@ -77,8 +75,6 @@ namespace LibraryApp.Controllers
                 AuthorName = book.Author?.Name,
                 AuthorBio = book.Author?.Bio,
                 CategoryName = book.Category?.Name,
-                TotalCopies = book.TotalCopies,
-                AvailableCopies = book.AvailableCopies,
                 CoverUrl = book.CoverUrl,
                 Description = book.Description,
                 PublishedYear = book.PublishedYear,
@@ -100,8 +96,6 @@ namespace LibraryApp.Controllers
                 Isbn = dto.Isbn,
                 AuthorId = dto.AuthorId,
                 CategoryId = dto.CategoryId,
-                TotalCopies = dto.TotalCopies,
-                AvailableCopies = dto.TotalCopies,
                 CoverUrl = dto.CoverUrl,
                 Description = dto.Description,
                 PublishedYear = dto.PublishedYear,
@@ -142,7 +136,6 @@ namespace LibraryApp.Controllers
             book.Isbn = dto.Isbn;
             book.AuthorId = dto.AuthorId;
             book.CategoryId = dto.CategoryId;
-            book.TotalCopies = dto.TotalCopies;
             book.CoverUrl = dto.CoverUrl;
             book.Description = dto.Description;
             book.PublishedYear = dto.PublishedYear;

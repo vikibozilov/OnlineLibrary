@@ -304,7 +304,6 @@ async function adminAddBook() {
     var title = document.getElementById('adminBookTitle').value.trim();
     var isbn = document.getElementById('adminBookIsbn').value.trim();
     var year = document.getElementById('adminBookYear').value;
-    var copies = document.getElementById('adminBookCopies').value;
     var desc = document.getElementById('adminBookDesc').value.trim();
     var coverUrl = document.getElementById('adminBookCover').value.trim() || null;
     var pdfUrl = document.getElementById('adminBookPdf') ? document.getElementById('adminBookPdf').value.trim() || null : null;
@@ -314,7 +313,6 @@ async function adminAddBook() {
     var result = await apiFetch('/api/books', 'POST', {
         title: title, isbn: isbn || null,
         publishedYear: year ? parseInt(year) : null,
-        totalCopies: parseInt(copies) || 1,
         coverUrl: coverUrl, description: desc || null,
         pdfUrl: pdfUrl,
         authorId: authorEl.value ? parseInt(authorEl.value) : null,
@@ -323,7 +321,6 @@ async function adminAddBook() {
     if (result.ok) {
         showMessage('Книгата е добавена успешно!');
         ['adminBookTitle', 'adminBookIsbn', 'adminBookYear', 'adminBookDesc', 'adminBookCover'].forEach(function (id) { document.getElementById(id).value = ''; });
-        document.getElementById('adminBookCopies').value = '1';
         loadAdminBooks();
     } else showMessage(result.data.message || 'Грешка при добавяне.', 'error');
 }
@@ -331,9 +328,9 @@ async function adminAddBook() {
 async function loadAdminBooks() {
     var result = await apiFetch('/api/books');
     if (!result.ok) return;
-    var html = '<table><thead><tr><th>Заглавие</th><th>Автор</th><th>Налични</th><th>Общо</th><th>Действия</th></tr></thead><tbody>';
+    var html = '<table><thead><tr><th>Заглавие</th><th>Автор</th><th>Действия</th></tr></thead><tbody>';
     result.data.forEach(function (b) {
-        html += '<tr><td>' + b.title + '</td><td>' + (b.authorName || '-') + '</td><td>' + b.availableCopies + '</td><td>' + b.totalCopies + '</td>' +
+        html += '<tr><td>' + b.title + '</td><td>' + (b.authorName || '-') + '</td>' +
             '<td><button class="btn-primary" onclick="editBook(' + b.id + ')">Редактирай</button> <button class="btn-danger" onclick="adminDeleteBook(' + b.id + ')">Изтрий</button></td></tr>';
     });
     html += '</tbody></table>';
@@ -355,7 +352,6 @@ async function editBook(id) {
     document.getElementById('adminBookTitle').value = b.title || '';
     document.getElementById('adminBookIsbn').value = b.isbn || '';
     document.getElementById('adminBookYear').value = b.publishedYear || '';
-    document.getElementById('adminBookCopies').value = b.totalCopies || 1;
     document.getElementById('adminBookCover').value = b.coverUrl || '';
     document.getElementById('adminBookDesc').value = b.description || '';
     var authorSel = document.getElementById('adminBookAuthor');
@@ -376,7 +372,6 @@ async function updateBook(id) {
     var title = document.getElementById('adminBookTitle').value.trim();
     var isbn = document.getElementById('adminBookIsbn').value.trim();
     var year = document.getElementById('adminBookYear').value;
-    var copies = document.getElementById('adminBookCopies').value;
     var cover = document.getElementById('adminBookCover').value.trim();
     var desc = document.getElementById('adminBookDesc').value.trim();
     var authorEl = document.getElementById('adminBookAuthor');
@@ -385,7 +380,6 @@ async function updateBook(id) {
     var result = await apiFetch('/api/books/' + id, 'PUT', {
         title: title, isbn: isbn || null,
         publishedYear: year ? parseInt(year) : null,
-        totalCopies: parseInt(copies) || 1,
         coverUrl: cover || null, description: desc || null,
         authorId: authorEl.value ? parseInt(authorEl.value) : null,
         categoryId: categoryEl.value ? parseInt(categoryEl.value) : null
@@ -396,7 +390,6 @@ async function updateBook(id) {
         btn.textContent = 'Добави книга';
         btn.onclick = function () { adminAddBook(); };
         ['adminBookTitle', 'adminBookIsbn', 'adminBookYear', 'adminBookDesc', 'adminBookCover'].forEach(function (id) { document.getElementById(id).value = ''; });
-        document.getElementById('adminBookCopies').value = '1';
         loadAdminBooks();
     } else showMessage(result.data.message || 'Грешка при обновяване.', 'error');
 }

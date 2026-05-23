@@ -42,8 +42,6 @@ namespace LibraryApp.Controllers
                     CoverUrl = f.Book.CoverUrl,
                     PdfUrl = f.Book.PdfUrl,
                     PublishedYear = f.Book.PublishedYear,
-                    AvailableCopies = f.Book.AvailableCopies,
-                    TotalCopies = f.Book.TotalCopies
                 })
                 .ToListAsync();
 

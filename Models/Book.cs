@@ -23,12 +23,6 @@ namespace LibraryApp.Models
         [Column("category_id")]
         public int? CategoryId { get; set; }
 
-        [Column("total_copies")]
-        public int TotalCopies { get; set; } = 1;
-
-        [Column("available_copies")]
-        public int AvailableCopies { get; set; } = 1;
-
         [Column("cover_url")]
         public string? CoverUrl { get; set; }
 
