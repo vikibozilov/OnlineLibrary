@@ -557,8 +557,8 @@ function filterReadingList(status) {
             '<option value="reading"' + (r.status === 'reading' ? ' selected' : '') + '>Чета сега</option>' +
             '<option value="read"' + (r.status === 'read' ? ' selected' : '') + '>Прочетена</option>' +
             '</select></div>' +
-            (r.startedAt ? '<p style="font-size:12px;color:#aaa;">Започната: ' + new Date(r.startedAt).toLocaleDateString('bg-BG') + '</p>' : '') +
-            (r.finishedAt ? '<p style="font-size:12px;color:#aaa;">Завършена: ' + new Date(r.finishedAt).toLocaleDateString('bg-BG') + '</p>' : '') +
+            (r.status !== 'want_to_read' && r.startedAt ? '<p style="font-size:12px;color:#aaa;">Започната: ' + new Date(r.startedAt).toLocaleDateString('bg-BG') + '</p>' : '') +
+            (r.status === 'read' && r.finishedAt ? '<p style="font-size:12px;color:#aaa;">Завършена: ' + new Date(r.finishedAt).toLocaleDateString('bg-BG') + '</p>' : '') +
             (r.status === 'reading' && r.pdfUrl ? '<a href="' + r.pdfUrl + '" target="_blank" style="display:block;width:100%;padding:8px;margin-top:8px;background:linear-gradient(135deg,#27ae60,#219a52);color:white;border-radius:8px;font-size:13px;text-align:center;text-decoration:none;">Продължи четенето</a>' : '') +
             '<button onclick="removeFromReadingList(' + r.id + ')" style="width:100%;padding:8px;margin-top:8px;background:#e74c3c;color:white;border:none;border-radius:8px;cursor:pointer;font-size:13px;">Премахни</button>' +            '</div></div>';
     });
