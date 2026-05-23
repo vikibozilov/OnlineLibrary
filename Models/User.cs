@@ -27,11 +27,5 @@ namespace LibraryApp.Models
         [Column("created_at")]
         public DateTime CreatedAt { get; set; } = DateTime.Now;
 
-        [Column("reset_code")]
-        public string? ResetCode { get; set; }
-
-        [Column("reset_code_expires")]
-        public DateTime? ResetCodeExpires { get; set; }
-
     }
 }
